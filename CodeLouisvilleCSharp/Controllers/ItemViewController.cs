@@ -8,7 +8,7 @@ using CodeLouisvilleCSharp.Repository;
 
 namespace CodeLouisvilleCSharp.Controllers
 {
-    public class AddItemController : Controller
+    public class ItemViewController : Controller
     {
         [Authorize]
         public ActionResult AddItem()
