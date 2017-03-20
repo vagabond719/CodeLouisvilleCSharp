@@ -1,0 +1,25 @@
+﻿@using CodeLouisvilleCSharp.Models
+@model CodeLouisvilleCSharp.Models.Home
+@{
+    ViewBag.Title = "Budget Piggy";
+}
+
+<link href="~/Content/Site.css" rel="stylesheet" />
+
+<div class="jumbotron">
+    <p class="lead">Welcome to Budget Piggy. A simple app for tracking your budget.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <a href="~/AddItem/AddItem"
+            class="btn btn-primary" id="AddButton">
+            <span class="glyphicon glyphicon-plus"></span> Add Entry
+        </a>
+        @{Html.RenderAction("GetTable");}
+        </div>
+    <div class="col-md-8">
+        <img id="chart" src="@Url.Action("GetChartImage")"/>
+    </div>
+</div>
+   
