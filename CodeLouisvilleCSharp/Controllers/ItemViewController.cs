@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using CodeLouisvilleCSharp.Models;
 using CodeLouisvilleCSharp.Repository;
+using Microsoft.AspNet.Identity;
 
 namespace CodeLouisvilleCSharp.Controllers
 {
@@ -25,19 +26,11 @@ namespace CodeLouisvilleCSharp.Controllers
             }
 
             var piggyRepository = new PiggyRepository();
+            home.UserManager = User.Identity.GetUserId();
+
             piggyRepository.Create(home);
             return RedirectToAction("Index", "Home");
         }
-
-        //public void Enter(Home home)
-        //{
-        //    using (var piggyModel = new PiggyModel())
-        //    {
-        //        piggyModel.Home.Add(home);
-
-        //        piggyModel.SaveChanges();
-        //    }
-        //}
 
         [HttpPost]
         public ActionResult EditItem(Home home)
@@ -57,8 +50,6 @@ namespace CodeLouisvilleCSharp.Controllers
         {
             var repository = new PiggyRepository();
             var results = repository.GetById(id);
-            //repository.Delete(id);
-            //return View("DeleteItem");
             return View(results);
         }
 

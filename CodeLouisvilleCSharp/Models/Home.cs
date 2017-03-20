@@ -13,18 +13,8 @@ namespace CodeLouisvilleCSharp.Models
         public double Ammount { get; set; }
         public Category ChosenCategory { get; set; }
         public Frequency ChosenFrequency { get; set;  }
-        public string UserManager
-        {
-            get
-            {
-                return HttpContext.Current.User.Identity.GetUserId();
-            }
-            private set
-            {
-                HttpContext.Current.User.Identity.GetUserId();
-            }
-        }
-
+        public string UserManager { get; set; }
+        
         public List<Home> GetList()
         {
             using(var context = new PiggyModel())

@@ -43,7 +43,10 @@ namespace CodeLouisvilleCSharp.Controllers
             List<decimal> yValue = new List<decimal>();
             using (var context = new PiggyModel())
             {
-                var results = context.Home.Select(rs => new {rs.ChosenCategory, rs.Ammount}).ToList();
+
+                var userId = User.Identity.GetUserId();
+                
+                var results = context.Home.Where(h => h.UserManager == userId).Select(rs => new {rs.ChosenCategory, rs.Ammount}).ToList();
 
                 results.ToList().ForEach(rs => xValue.Add(rs.ChosenCategory.ToString()));
                 results.ToList().ForEach(rs => yValue.Add((decimal)rs.Ammount));
@@ -61,7 +64,9 @@ namespace CodeLouisvilleCSharp.Controllers
         {
             using (var context = new PiggyModel())
             {
-                var results = context.Home.ToList();
+                var userId = User.Identity.GetUserId();
+
+                var results = context.Home.Where(h => h.UserManager == userId);
 
                 var table = @"<table id=""ChartData"" class=""table - striped""><tr><th> Ammount </th><th> Category </th><th> Frequency </t ><th> </th><th> </th></tr>";
 
