@@ -69,7 +69,7 @@ namespace CodeLouisvilleCSharp.Controllers
                 {
                     table += @"<tr><td>" + result.Ammount + "</td><td>" +
                              result.ChosenCategory.ToString() + "</td><td>" + result.ChosenFrequency + "</td>" +
-                             @"<td><span class=""glyphicon glyphicon-edit""></span></td><td><a href=""/Home/Delete/" + result.Id + @"""><span class=""glyphicon glyphicon-trash""></span></a></td></tr>";
+                             @"<td><span class=""glyphicon glyphicon-edit""></span></td><td><a href=""/ItemView/DeleteItem/" + result.Id + @"""><span class=""glyphicon glyphicon-trash""></span></a></td></tr>";
                 }
                 table += "</table>";
                 return table;

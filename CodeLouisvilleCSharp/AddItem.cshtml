@@ -19,7 +19,6 @@
         <div class="col-md-4">
             @using (var form = @Html.BeginForm("submit", "ItemView"))
             {
-                @Html.AntiForgeryToken()
                 <div class="form-group">
                     @Html.Label("Ammount", null, new {id = "LabelSpace"})
                     @Html.TextBoxFor(home => home.Ammount, null, new {id = "AddText"})
