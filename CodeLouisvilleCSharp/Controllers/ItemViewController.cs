@@ -32,16 +32,19 @@ namespace CodeLouisvilleCSharp.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet]
+        public ActionResult EditItem(int id)
+        {
+            var piggyRepository = new PiggyRepository();
+            var results = piggyRepository.GetById(id);
+            return View(results);
+        }
+
         [HttpPost]
         public ActionResult EditItem(Home home)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("EditItem");
-            }
-
             var piggyRepository = new PiggyRepository();
-            piggyRepository.Create(home);
+            piggyRepository.Update(home);
             return RedirectToAction("Index", "Home");
         }
 
@@ -58,7 +61,6 @@ namespace CodeLouisvilleCSharp.Controllers
         {
             var repository = new PiggyRepository();
             repository.Delete(id);
-            return View("DeleteItem");
             return RedirectToAction("Index", "Home");
         }
     }

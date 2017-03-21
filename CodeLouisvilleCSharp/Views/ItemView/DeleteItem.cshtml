@@ -19,7 +19,7 @@
         <div class="col-md-4">
             @using (var form = @Html.BeginForm("Delete", "ItemView"))
             {
-                @Html.AntiForgeryToken()
+                @*@Html.AntiForgeryToken()*@
                 @Html.HiddenFor(h => h.Id)
                 <div>
                     <h2>Are you sure you want to delete this record?</h2>

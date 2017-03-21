@@ -13,6 +13,13 @@ namespace CodeLouisvilleCSharp.Controllers
 {
     public class HomeController : Controller
     {
+        private List<Home> categories;
+        private double PaycheckAmmount;
+        private double BillAmmount;
+        private double SavingsAmmount;
+        private double DiningAmmount;
+        private double EntertainmentAmmount;
+
         [Authorize]
         public ActionResult Index()
         {
@@ -40,16 +47,45 @@ namespace CodeLouisvilleCSharp.Controllers
         {
             List<Home> home = new List<Home>();
             ArrayList xValue = new ArrayList();
-            List<decimal> yValue = new List<decimal>();
+            List<double> yValue = new List<double>();
             using (var context = new PiggyModel())
             {
 
                 var userId = User.Identity.GetUserId();
                 
-                var results = context.Home.Where(h => h.UserManager == userId).Select(rs => new {rs.ChosenCategory, rs.Ammount}).ToList();
+                categories = context.Home.Where(h => h.UserManager == userId).ToList();
 
-                results.ToList().ForEach(rs => xValue.Add(rs.ChosenCategory.ToString()));
-                results.ToList().ForEach(rs => yValue.Add((decimal)rs.Ammount));
+                foreach (var category in categories)
+                {
+                    if (category.ChosenFrequency == Frequency.Annualy)
+                    {
+                        catCheck(category.Ammount, category);
+                    }
+                    else if (category.ChosenFrequency == Frequency.Daily)
+                    {
+                        catCheck(category.Ammount * 365, category);
+                    }
+                    else if (category.ChosenFrequency == Frequency.Monthly)
+                    {
+                        catCheck(category.Ammount * 12, category);
+                    }
+                    else if (category.ChosenFrequency == Frequency.Weekly)
+                    {
+                        catCheck(category.Ammount * 52, category);
+                    }
+                }
+                
+                xValue.Add("Pay Check");
+                xValue.Add("Bill");
+                xValue.Add("Savings");
+                xValue.Add("Dining");
+                xValue.Add("Entertainment");
+                
+                yValue.Add(PaycheckAmmount);
+                yValue.Add(BillAmmount);
+                yValue.Add(SavingsAmmount);
+                yValue.Add(DiningAmmount);
+                yValue.Add(EntertainmentAmmount);
             }
 
             var chart = new Chart(800, 600, ChartTheme.Vanilla3D)
@@ -58,6 +94,30 @@ namespace CodeLouisvilleCSharp.Controllers
                            yValues: yValue)
                            .GetBytes("png");
             return File(chart, "image/bytes");
+        }
+
+        public void catCheck(double amount, Home home)
+        {
+            if (home.ChosenCategory == Category.Bill)
+            {
+                BillAmmount += amount;
+            }
+            else if (home.ChosenCategory == Category.Dining)
+            {
+                DiningAmmount += amount;
+            }
+            else if (home.ChosenCategory == Category.Entertainment)
+            {
+                EntertainmentAmmount += amount;
+            }
+            else if (home.ChosenCategory == Category.PayCheck)
+            {
+                PaycheckAmmount += amount;
+            }
+            else if (home.ChosenCategory == Category.Savings)
+            {
+                SavingsAmmount += amount;
+            }
         }
 
         public string GetTable()
@@ -74,20 +134,13 @@ namespace CodeLouisvilleCSharp.Controllers
                 {
                     table += @"<tr><td>" + result.Ammount + "</td><td>" +
                              result.ChosenCategory.ToString() + "</td><td>" + result.ChosenFrequency + "</td>" +
-                             @"<td><span class=""glyphicon glyphicon-edit""></span></td><td><a href=""/ItemView/DeleteItem/" + result.Id + @"""><span class=""glyphicon glyphicon-trash""></span></a></td></tr>";
+                             @"<td><a href=""/ItemView/EditItem/" + result.Id + @"""><span class=""glyphicon glyphicon-edit""></span></a></td>" + "" +
+                             @"<td><a href=""/ItemView/DeleteItem/" + result.Id + @"""><span class=""glyphicon glyphicon-trash""></span></a></td></tr>";
                 }
                 table += "</table>";
                 return table;
 
             }
-        }
-
-        [HttpPost]
-        public ActionResult Delete(int id)
-        {
-            var repository = new PiggyRepository();
-            repository.Delete(id);
-            return View("Index");
         }
     }
 }

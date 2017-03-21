@@ -36,9 +36,8 @@ namespace CodeLouisvilleCSharp.Models
     public enum Frequency
     {
         Daily = 1,
-        BusinessWeek = 2,
-        Weekly = 3,
-        Monthly = 4,
-        Annualy = 5
+        Weekly = 2,
+        Monthly = 3,
+        Annualy = 4
     }
 }
