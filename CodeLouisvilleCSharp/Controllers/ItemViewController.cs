@@ -49,15 +49,15 @@ namespace CodeLouisvilleCSharp.Controllers
         }
 
         [Authorize]
-        public ActionResult DeleteItem(int id)
+        public ActionResult DeleteItem(Home home)
         {
             var repository = new PiggyRepository();
-            var results = repository.GetById(id);
+            var results = repository.GetById(home.Id);
             return View(results);
         }
 
         [HttpPost]
-        public ActionResult Delete(int id)
+        public ActionResult DeleteItem(int id)
         {
             var repository = new PiggyRepository();
             repository.Delete(id);

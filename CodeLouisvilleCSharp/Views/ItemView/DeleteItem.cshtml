@@ -16,16 +16,23 @@
 <div class="row">
 </div>
     <div class="row">
-        <div class="col-md-4">
-            @using (var form = @Html.BeginForm("Delete", "ItemView"))
+        <div class="col-md-8">
+            @using (var form = @Html.BeginForm("DeleteItem", "ItemView"))
             {
-                @*@Html.AntiForgeryToken()*@
-                @Html.HiddenFor(h => h.Id)
                 <div>
                     <h2>Are you sure you want to delete this record?</h2>
                 </div>
-                <div>
-                    @Html.DisplayNameFor(home => home.Ammount);
+                <div class="form-group">
+                    @Html.Label("Ammount", null, new { id = "LabelSpace" })
+                    @Html.TextBoxFor(home => home.Ammount, new { @class = "form-control", @readonly = "true" })
+                </div>
+                <div class="form-group">
+                    @Html.Label("Category")
+                    @Html.TextBoxFor(home => home.ChosenCategory, new { @class = "form-control", @readonly = "true" })
+                </div>
+                <div class="form-group">
+                    @Html.Label("Frequency")
+                    @Html.TextBoxFor(home => home.ChosenFrequency, new { @class = "form-control", @readonly = "true" })
                 </div>
                 <button type="submit" class="btn btn-primary">
                     <i class="glyphicon glyphicon-trash"></i> Delete
