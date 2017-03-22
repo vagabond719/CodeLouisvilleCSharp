@@ -2,9 +2,7 @@ using CodeLouisvilleCSharp.Models;
 
 namespace CodeLouisvilleCSharp
 {
-    using System;
     using System.Data.Entity;
-    using System.Linq;
 
     public class PiggyModel : DbContext
     {
@@ -17,22 +15,22 @@ namespace CodeLouisvilleCSharp
         public PiggyModel()
             : base("name=PiggyModel")
         {
-            Database.SetInitializer(new MyCustomInitializer());
+            //Database.SetInitializer(new MyCustomInitializer());
         }
         public DbSet<Home> Home { get; set; }
     }
 
-    public class MyCustomInitializer :
-            DropCreateDatabaseIfModelChanges<PiggyModel>
-    {
-        public override void InitializeDatabase(PiggyModel context)
-        {
-            context.Home.Add(new Home() { Ammount = 500.00, ChosenCategory = (Category) 1, ChosenFrequency = (Frequency) 3 });
-            context.Home.Add(new Home() { Ammount = 50.00, ChosenCategory = (Category) 3, ChosenFrequency = (Frequency) 4 });
-            context.Home.Add(new Home() { Ammount = 100.00, ChosenCategory = (Category) 3, ChosenFrequency = (Frequency) 4 });
-            context.Home.Add(new Home() { Ammount = 25.00, ChosenCategory = (Category) 5, ChosenFrequency = (Frequency) 1 });
-            context.Home.Add(new Home() { Ammount = 50.00, ChosenCategory = (Category) 4, ChosenFrequency = (Frequency) 2 });
-            base.InitializeDatabase(context);
-        }
-    }
+    //public class MyCustomInitializer :
+    //        DropCreateDatabaseIfModelChanges<PiggyModel>
+    //{
+    //    public override void InitializeDatabase(PiggyModel context)
+    //    {
+    //        context.Home.Add(new Home() { Ammount = 500.00, ChosenCategory = (Category) 1, ChosenFrequency = (Frequency) 3 });
+    //        context.Home.Add(new Home() { Ammount = 50.00, ChosenCategory = (Category) 3, ChosenFrequency = (Frequency) 4 });
+    //        context.Home.Add(new Home() { Ammount = 100.00, ChosenCategory = (Category) 3, ChosenFrequency = (Frequency) 4 });
+    //        context.Home.Add(new Home() { Ammount = 25.00, ChosenCategory = (Category) 5, ChosenFrequency = (Frequency) 1 });
+    //        context.Home.Add(new Home() { Ammount = 50.00, ChosenCategory = (Category) 4, ChosenFrequency = (Frequency) 2 });
+    //        base.InitializeDatabase(context);
+    //    }
+    //}
 }

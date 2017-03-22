@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Microsoft.AspNet.Identity;
-
-namespace CodeLouisvilleCSharp.Models
+﻿namespace CodeLouisvilleCSharp.Models
 {
     public class Home
     {
@@ -14,14 +7,6 @@ namespace CodeLouisvilleCSharp.Models
         public Category ChosenCategory { get; set; }
         public Frequency ChosenFrequency { get; set;  }
         public string UserManager { get; set; }
-        
-        public List<Home> GetList()
-        {
-            using(var context = new PiggyModel())
-            {
-                return context.Home.ToList();
-            }
-        }
     }
 
     public enum Category

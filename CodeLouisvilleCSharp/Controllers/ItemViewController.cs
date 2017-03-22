@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using CodeLouisvilleCSharp.Models;
 using CodeLouisvilleCSharp.Repository;
 using Microsoft.AspNet.Identity;
@@ -35,32 +31,28 @@ namespace CodeLouisvilleCSharp.Controllers
         [HttpGet]
         public ActionResult EditItem(int id)
         {
-            var piggyRepository = new PiggyRepository();
-            var results = piggyRepository.GetById(id);
+            var results = PiggyRepository.GetById(id);
             return View(results);
         }
 
         [HttpPost]
         public ActionResult EditItem(Home home)
         {
-            var piggyRepository = new PiggyRepository();
-            piggyRepository.Update(home);
+            PiggyRepository.Update(home);
             return RedirectToAction("Index", "Home");
         }
 
         [Authorize]
         public ActionResult DeleteItem(Home home)
         {
-            var repository = new PiggyRepository();
-            var results = repository.GetById(home.Id);
+            var results = PiggyRepository.GetById(home.Id);
             return View(results);
         }
 
         [HttpPost]
         public ActionResult DeleteItem(int id)
         {
-            var repository = new PiggyRepository();
-            repository.Delete(id);
+            PiggyRepository.Delete(id);
             return RedirectToAction("Index", "Home");
         }
     }
