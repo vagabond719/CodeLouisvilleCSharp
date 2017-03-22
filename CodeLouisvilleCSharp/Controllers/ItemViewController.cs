@@ -13,6 +13,7 @@ namespace CodeLouisvilleCSharp.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Submit(Home home)
         {
@@ -28,6 +29,7 @@ namespace CodeLouisvilleCSharp.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult EditItem(int id)
         {
@@ -35,6 +37,8 @@ namespace CodeLouisvilleCSharp.Controllers
             return View(results);
         }
 
+
+        [Authorize]
         [HttpPost]
         public ActionResult EditItem(Home home)
         {
@@ -49,6 +53,8 @@ namespace CodeLouisvilleCSharp.Controllers
             return View(results);
         }
 
+
+        [Authorize]
         [HttpPost]
         public ActionResult DeleteItem(int id)
         {
