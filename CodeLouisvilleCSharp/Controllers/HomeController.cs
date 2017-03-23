@@ -69,18 +69,35 @@ namespace CodeLouisvilleCSharp.Controllers
                         CatCheck(category.Ammount * 52, category);
                     }
                 }
-                
-                xValue.Add("Pay Check");
-                xValue.Add("Bill");
-                xValue.Add("Savings");
-                xValue.Add("Dining");
-                xValue.Add("Entertainment");
-                
-                yValue.Add(_paycheckAmmount);
-                yValue.Add(_billAmmount);
-                yValue.Add(_savingsAmmount);
-                yValue.Add(_diningAmmount);
-                yValue.Add(_entertainmentAmmount);
+                if (_paycheckAmmount > 0)
+                {
+                    yValue.Add(_paycheckAmmount);
+                    xValue.Add("Pay Check");
+                }
+
+                if (_billAmmount > 0)
+                {
+                    yValue.Add(_billAmmount);
+                    xValue.Add("Bill");
+                }
+
+                if (_savingsAmmount > 0)
+                {
+                    yValue.Add(_savingsAmmount);
+                    xValue.Add("Savings");
+                }
+
+                if (_diningAmmount > 0)
+                {
+                    yValue.Add(_diningAmmount);
+                    xValue.Add("Dining");
+                }
+
+                if (_entertainmentAmmount > 0)
+                {
+                    yValue.Add(_entertainmentAmmount);
+                    xValue.Add("Entertainment");
+                }
             }
 
             var chart = new Chart(800, 600, ChartTheme.Vanilla3D)

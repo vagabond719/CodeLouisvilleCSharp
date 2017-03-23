@@ -194,14 +194,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\aspnet-CodeLouisvilleCSharp-20170311051829.mdf" />
-    <Content Include="App_Data\aspnet-CodeLouisvilleCSharp-20170311051829_log.ldf">
-      <DependentUpon>aspnet-CodeLouisvilleCSharp-20170311051829.mdf</DependentUpon>
-    </Content>
-    <Content Include="App_Data\Piggy.mdf" />
-    <Content Include="App_Data\Piggy_log.ldf">
-      <DependentUpon>Piggy.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -293,6 +285,9 @@
     <None Include="Models\DataClasses1.dbml.layout">
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

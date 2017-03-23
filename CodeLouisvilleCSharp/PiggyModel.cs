@@ -16,6 +16,7 @@ namespace CodeLouisvilleCSharp
             : base("name=PiggyModel")
         {
             //Database.SetInitializer(new MyCustomInitializer());
+            Database.SetInitializer<PiggyModel>(new CreateDatabaseIfNotExists<PiggyModel>());
         }
         public DbSet<Home> Home { get; set; }
     }
