@@ -50,6 +50,7 @@ namespace CodeLouisvilleCSharp.Controllers
                 
                 _categories = context.Home.Where(h => h.UserManager == userId).ToList();
 
+                //Equalize the ammounts to the chart shows correctly
                 foreach (var category in _categories)
                 {
                     if (category.ChosenFrequency == Frequency.Annualy)
@@ -69,6 +70,7 @@ namespace CodeLouisvilleCSharp.Controllers
                         CatCheck(category.Ammount * 52, category);
                     }
                 }
+                //Only show ammounts greater than 0 on the chart
                 if (_paycheckAmmount > 0)
                 {
                     yValue.Add(_paycheckAmmount);
@@ -100,6 +102,7 @@ namespace CodeLouisvilleCSharp.Controllers
                 }
             }
 
+            //Build the chrt
             var chart = new Chart(800, 600, ChartTheme.Vanilla3D)
            .AddSeries(chartType: "pie",
                            xValue: xValue,
@@ -108,6 +111,7 @@ namespace CodeLouisvilleCSharp.Controllers
             return File(chart, "image/bytes");
         }
 
+        //Group items of the same type together
         public void CatCheck(double amount, Home home)
         {
             if (home.ChosenCategory == Category.Bill)
@@ -132,6 +136,7 @@ namespace CodeLouisvilleCSharp.Controllers
             }
         }
 
+        //Build table
         public string GetTable()
         {
             using (var context = new PiggyModel())

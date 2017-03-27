@@ -1,5 +1,6 @@
 ﻿namespace CodeLouisvilleCSharp.Models
 {
+    //Basic class for the project
     public class Home
     {
         public int Id { get; set; }

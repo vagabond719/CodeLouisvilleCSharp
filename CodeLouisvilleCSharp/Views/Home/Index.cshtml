@@ -13,12 +13,14 @@
 <div class="row">
     <div class="col-md-4">
         <a href="~/ItemView/AddItem"
-            class="btn btn-primary" id="AddButton">
+           class="btn btn-primary" id="AddButton">
             <span class="glyphicon glyphicon-plus"></span> Add Entry
         </a>
+        @*Pull partial view to show the table*@
         @{Html.RenderAction("GetTable");}
         </div>
     <div class="col-md-8">
+        @*Pull partial view to show the chart*@
         <img id="chart" src="@Url.Action("GetChartImage")"/>
     </div>
 </div>
