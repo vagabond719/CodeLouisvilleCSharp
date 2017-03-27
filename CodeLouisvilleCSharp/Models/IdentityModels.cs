@@ -21,7 +21,7 @@ namespace CodeLouisvilleCSharp.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("PiggyModel", throwIfV1Schema: false)
         {
         }
 
