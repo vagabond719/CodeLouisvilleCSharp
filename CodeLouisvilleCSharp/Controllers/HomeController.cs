@@ -101,7 +101,6 @@ namespace CodeLouisvilleCSharp.Controllers
                     xValue.Add("Entertainment");
                 }
             }
-
             //Build the chrt
             var chart = new Chart(800, 600, ChartTheme.Vanilla3D)
            .AddSeries(chartType: "pie",
@@ -145,17 +144,29 @@ namespace CodeLouisvilleCSharp.Controllers
 
                 var results = context.Home.Where(h => h.UserManager == userId);
 
-                var table = @"<table id=""ChartData"" class=""table - striped""><tr><th> Ammount </th><th> Category </th><th> Frequency </t ><th> </th><th> </th></tr>";
-
-                foreach (var result in results)
+                if (results.Count() > 0)
                 {
-                    table += @"<tr><td>" + result.Ammount + "</td><td>" +
-                             result.ChosenCategory.ToString() + "</td><td>" + result.ChosenFrequency + "</td>" +
-                             @"<td><a href=""/ItemView/EditItem/" + result.Id + @"""><span class=""glyphicon glyphicon-edit""></span></a></td>" + "" +
-                             @"<td><a href=""/ItemView/DeleteItem/" + result.Id + @"""><span class=""glyphicon glyphicon-trash""></span></a></td></tr>";
+
+                    var table =
+                        @"<table id=""ChartData"" class=""table - striped""><tr><th> Ammount </th><th> Category </th><th> Frequency </t ><th> </th><th> </th></tr>";
+
+                    foreach (var result in results)
+                    {
+                        table += @"<tr><td>" + result.Ammount + "</td><td>" +
+                                 result.ChosenCategory.ToString() + "</td><td>" + result.ChosenFrequency + "</td>" +
+                                 @"<td><a href=""/ItemView/EditItem/" + result.Id +
+                                 @"""><span class=""glyphicon glyphicon-edit""></span></a></td>" + "" +
+                                 @"<td><a href=""/ItemView/DeleteItem/" + result.Id +
+                                 @"""><span class=""glyphicon glyphicon-trash""></span></a></td></tr>";
+                    }
+                    table += "</table>";
+                    return table;
                 }
-                table += "</table>";
-                return table;
+                else
+                {
+                    //return @"<div style=""clear: both;padding-top: 10px;""><h4>Please add an entry to get started.</h4></div>";
+                    return @"<div id=""note""><h4>Please add an entry to get started.</h4></div>";
+                }
 
             }
         }

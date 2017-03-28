@@ -71,3 +71,8 @@ textarea {
 #PigIcon {
     margin-top: -8px;
 }
+
+#note {
+    clear: both;
+    padding-top: 10px;   
+}
